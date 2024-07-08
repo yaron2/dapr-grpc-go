@@ -31,12 +31,8 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-const (
-	defaultName = "world"
-)
-
 var (
-	addr = flag.String("addr", "localhost:3501", "the address to connect to")
+	addr = flag.String("addr", "localhost:50001", "the address to connect to")
 )
 
 func main() {
@@ -53,10 +49,14 @@ func main() {
 	ctx := context.TODO()
 	ctx = metadata.AppendToOutgoingContext(ctx, "dapr-app-id", "server")
 
-	for i := 0; i < 10; i++ {
+	i := 0
+
+	for {
+		i++
+
 		r, err := c.SayHello(ctx, &pb.HelloRequest{Name: fmt.Sprintf("%v", i)})
 		if err != nil {
-			log.Fatalf("could not greet: %v", err)
+			log.Printf("could not greet: %v", err)
 			return
 		}
 

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "server"
+        dapr.io/app-port: "50051"
+    spec:
+      containers:
+      - name: server
+        image: docker.io/yaron2/goserver:v1
+        ports:
+        - containerPort: 50051
+        imagePullPolicy: Always

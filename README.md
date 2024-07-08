@@ -23,7 +23,7 @@ $ dapr init
 cd greeter_server
 go mod tidy
 
-dapr run --app-id server --app-port 50051 -- go run main.go
+dapr run --app-id server --dapr-grpc-port 50006 --app-port 50051 -- go run main.go
 ```
 
 ### Run the gRPC Go client
@@ -32,7 +32,7 @@ dapr run --app-id server --app-port 50051 -- go run main.go
 cd greeter_client
 go mod tidy
 
-dapr run --app-id client --dapr-grpc-port 3501 -- go run main.go
+dapr run --app-id client --dapr-grpc-port 50001 -- go run main.go
 ```
 
 ### Verify it works
@@ -50,4 +50,30 @@ If everything is set up correctly, you should see an output similar to this:
 == APP == 2022/11/21 16:12:14 Greeting: Hello 7, 20221121161214
 == APP == 2022/11/21 16:12:15 Greeting: Hello 8, 20221121161215
 == APP == 2022/11/21 16:12:16 Greeting: Hello 9, 20221121161216
+```
+
+### Running on Kubernetes
+
+Running this example on Kubernetes is the same as running it locally. You simply need to Dockerize your code and assign the `dapr.io/app-id` value to `client` and `server` on your deployments.
+
+#### Deploy the server
+
+```bash
+cd greeter_server
+kubectl apply -f deploy.yaml
+```
+
+Wait until the server is running with 2/2 containers.
+
+#### Deploy the client
+
+```bash
+cd greeter_client
+kubectl apply -f deploy.yaml
+```
+
+#### Observe the calls
+
+```bash
+kubectl logs -l app=server -c server -f
 ```

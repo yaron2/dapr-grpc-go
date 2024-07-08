@@ -1,17 +1,16 @@
 module client
 
-go 1.19
+go 1.22
 
 require (
-	google.golang.org/grpc v1.51.0
-	google.golang.org/grpc/examples v0.0.0-20221121204250-0abb6f9b6971
+	google.golang.org/grpc v1.65.0
+	google.golang.org/grpc/examples v0.0.0-20240708204656-bb49a8868a2a
 )
 
 require (
-	github.com/golang/protobuf v1.5.2 // indirect
-	golang.org/x/net v0.2.0 // indirect
-	golang.org/x/sys v0.2.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
-	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6 // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
+	golang.org/x/net v0.27.0 // indirect
+	golang.org/x/sys v0.22.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240701130421-f6361c86f094 // indirect
+	google.golang.org/protobuf v1.34.2 // indirect
 )
